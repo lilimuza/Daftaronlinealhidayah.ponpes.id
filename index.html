@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftaronlinealhidayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #00703C;
+            --primary-gold: #FFD700;
+            --dark-bg: #04140c;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--dark-bg);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, #0a4d2e 0%, transparent 50%),
+                        radial-gradient(circle at 0% 100%, #00301a 0%, transparent 40%);
+            z-index: -1;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .input-style {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .input-style:focus {
+            border-color: var(--primary-gold);
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+            outline: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700 0%, #b8860b 100%);
+            color: #04140c;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 20px rgba(255, 214, 0, 0.15);
+        }
+        .section-header {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 40px; height: 3px;
+            background: var(--primary-gold);
+            border-radius: 2px;
+        }
+        .swiper-pagination-bullet-active { background: var(--primary-gold) !important; }
+        
+        .logo-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-container::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                to right, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 150%; }
+            100% { left: 150%; }
+        }
+        
+        nav .max-w-6xl {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .min-w-0 {
+            min-width: 0;
+        }
+        
+        @media (max-width: 640px) {
+            .glass-card { padding: 1.5rem !important; border-radius: 20px; }
+            h1 { font-size: 1.5rem !important; }
+        }
+
+        .modal {
+		
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal.active { display: flex; }
+
+        /* Custom style for brochure slider */
+        .brosur-swiper { width: 100%; padding-bottom: 30px; }
+        .brosur-img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; }
+		
+		/* Animasi Border Berputar */
+.rotating-border-card {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.rotating-border-card::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 50% 50%, 50% 50%;
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    background-image: linear-gradient(var(--primary-gold), var(--primary-gold));
+    animation: rotate-border 4s linear infinite;
+}
+
+.rotating-border-card::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 2px;
+    top: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    background: var(--dark-bg);
+    border-radius: inherit;
+    backdrop-filter: blur(20px);
+}
+
+@keyframes rotate-border {
+    100% { transform: rotate(1turn); }
+}
+/* Animasi Cahaya di Belakang Tabel */
+.glow-bg-animation {
+    position: relative;
+    z-index: 1;
+}
+
+.glow-bg-animation::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-gold) transparent;
+}
+
+.table-container::-webkit-scrollbar { width: 4px; }
+.table-container::-webkit-scrollbar-thumb { background: var(--primary-gold); border-radius: 10px; }
+
+		
+		.btn-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    color: #FFD700;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-back:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), transparent);
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+    color: white;
+}
+
+.btn-back::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-back:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-back:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 6s ease-in-out infinite;
+}
+
+/* Scrollbar Cantik agar tidak mengganggu pemandangan */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+}
+
+/* Style Tombol Kembali */
+.btn-back {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    backdrop-filter: blur(10px);
+}
+
+.btn-back:hover {
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255, 215, 0, 0.2);
+    color: white;
+}
+
+.btn-premium-close {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 9999px;
+    color: #FFD700;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(10px);
+}
+
+.btn-premium-close:hover {
+    color: #000;
+    background: #FFD700;
+    border-color: #FFD700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-premium-close:active {
+    transform: scale(0.95);
+}
+
+/* Efek Cahaya Berjalan di dalam tombol saat di-hover */
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.btn-premium-close:hover .btn-glow {
+    left: 100%;
+}
+
+/* Styling untuk Visi Misi & List Baru */
+.text-gold-gradient {
+    background: linear-gradient(135deg, #FFD700 0%, #b8860b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.list-premium li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+}
+
+.list-premium li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: var(--primary-gold);
+    font-size: 12px;
+}
+
+.grid-social a {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.grid-social a:hover {
+    background: rgba(255,215,0,0.1);
+    border-color: var(--primary-gold);
+    transform: translateY(-3px);
+}
+
+/* Animasi Shimmer Emas untuk Teks */
+.text-shimmer {
+    background: linear-gradient(90deg, #ffffff, #FFD700, #ffffff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+    to { background-position: 200% center; }
+}
+
+/* Animasi Mengambang Halus (Floating) */
+.floating-hero {
+    animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Animasi Denyut Halus untuk Logo */
+.logo-alive {
+    animation: pulse-soft 3s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(255,215,0,0)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 10px rgba(255,215,0,0.3)); }
+}
+
+/* Efek Cahaya Bergerak di Latar Belakang */
+@keyframes mesh-glow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.2); }
+    66% { transform: translate(-20px, 20px) scale(0.8); }
+}
+
+.animate-glow-slow {
+    animation: mesh-glow 10s ease-in-out infinite alternate;
+}
+
+/* Animasi Mengambang untuk Seluruh Card */
+.hero-floating {
+    animation: hero-float 6s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Efek Kilau pada Gradasi Emas */
+.text-gold-gradient {
+    background: linear-gradient(90deg, #FFD700, #fff7c0, #FFD700);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-gold 3s linear infinite;
+}
+
+@keyframes shine-gold {
+    to { background-position: 200% center; }
+}
+
+/* Tampilan Clean & Minimalis */
+.clean-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.clean-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.text-subtle {
+    color: #94a3b8;
+    letter-spacing: 0.05em;
+}
+
+/* Efek Bento Card & Hover */
+.info-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transition: 0.5s;
+}
+
+.info-card:hover::before {
+    left: 100%;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.icon-box {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-center;
+    background: rgba(255, 255, 255, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+/* Table & List Aesthetics */
+.premium-table thead th {
+    background: rgba(255, 215, 0, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    padding: 12px;
+}
+
+.premium-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.list-check li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 8px;
+}
+
+.list-check li::before {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    color: #FFD700;
+    font-size: 10px;
+}
+
+.brosur-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.brosur-card:hover {
+    border-color: #FFD700;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* CSS Tambahan untuk Tab */
+.tab-btn { color: #94a3b8; background: transparent; }
+.tab-btn.active { color: #000; background: #FFD700; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
+.tab-content.hidden { display: none; }
+.komplek-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
+
+
+@keyframes shimmer {
+    100% { transform: translateX(100%); }
+}
+
+/* Pastikan container utama modal seperti ini */
+.modal {
+    display: none; /* Sembunyi secara default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 9999;
+    padding: 20px; /* Memberi ruang agar tidak mepet layar */
+    overflow-y: auto; /* INI KUNCINYA: Membolehkan scroll vertikal */
+    align-items: flex-start; /* Ubah dari center ke flex-start agar tidak terpotong di atas */
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+/* Bagian konten di dalam modal */
+.modal-content {
+    background: #1a1a1a; /* Sesuaikan warna tema Anda */
+    width: 100%;
+    max-width: 500px;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: relative;
+    border-radius: 2rem;
+    /* Jangan gunakan height: 100% atau fixed height yang terlalu besar */
+}
+
+/* Efek Glassmorphism yang lebih dalam untuk hasil pencarian */
+.result-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Animasi Loading Spinner */
+.loader-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #FFD700;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Input Fokus Effect */
+.input-focus-glow:focus {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    transform: translateY(-1px);
+}
+    </style>
+</head>
+<body class="min-h-screen">
+   <div class="bg-glow"></div>
+
+<nav class="sticky top-0 z-50 px-4 py-4 md:py-6">
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-black/40 backdrop-blur-2xl border border-white/10 px-4 py-3 md:px-8 md:py-4 rounded-[2rem] shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] flex justify-between items-center gap-4 transition-all duration-500 hover:border-[#FFD700]/30 group">
+            
+            <div class="flex items-center gap-3 md:gap-5 min-w-0 flex-1"> 
+                <div class="logo-container relative flex-shrink-0">
+                    <div class="absolute inset-0 bg-[#FFD700]/20 blur-xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-700"></div>
+                    <img src="Logoalhidayah.png" alt="Logo" class="w-10 h-10 md:w-16 md:h-16 relative z-10 object-contain transition-transform duration-500 group-hover:rotate-[10deg] group-hover:scale-110">
+                </div>
+
+                <div class="min-w-0 overflow-hidden"> 
+                    <h1 class="text-[3.5vw] sm:text-lg md:text-xl font-black leading-tight tracking-tighter whitespace-nowrap uppercase text-white">
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-400">PP. AL-HIDAYAH</span> 
+                        <span class="text-[#FFD700] drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]">KETEGAN</span>
+                    </h1>
+                    <div class="flex items-center gap-2 mt-0.5">
+                        <div class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </div>
+                        <p class="text-[2.2vw] sm:text-[10px] text-slate-400 font-bold tracking-[0.2em] uppercase opacity-90">
+                            PSB Santri Baru <span class="text-white/60">T.A 2026-2027</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 md:gap-4">
+                <a href="https://wa.me/6285709385727" target="_blank" 
+                   class="flex items-center gap-2 bg-white/[0.03] hover:bg-green-600 border border-white/10 hover:border-green-500 text-white p-3 md:px-6 md:py-3 rounded-2xl transition-all duration-500 group/btn shadow-xl">
+                    <i class="fab fa-whatsapp text-lg transition-transform group-hover/btn:scale-125"></i>
+                    <span class="hidden lg:block text-[11px] font-black uppercase tracking-[0.2em]">Help Center</span>
+                </a>
+
+                <button onclick="openModal('modalBiayaDaftar')" 
+                        class="relative overflow-hidden flex items-center gap-2 bg-[#FFD700] text-black px-4 py-3 md:px-7 md:py-3 rounded-2xl transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,215,0,0.2)] hover:shadow-[#FFD700]/40">
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-[shimmer_3s_infinite]"></div>
+                    <i class="fas fa-receipt text-lg"></i>
+                    <span class="hidden md:block text-[11px] font-black uppercase tracking-[0.2em]">Cek Biaya</span>
+                </button>
+				
+				<button onclick="openModal('modalCekStatus')" class="bg-blue-600/10 hover:bg-blue-600 border border-blue-500/20 hover:border-blue-500 text-blue-500 hover:text-white px-3 py-2 md:px-5 md:py-2.5 rounded-xl transition-all duration-300">
+    <i class="fas fa-search text-sm md:text-base"></i>
+    <span class="hidden md:block text-[10px] font-bold uppercase tracking-widest mt-0.5">Cek Status</span>
+</button>
+
+<div id="modalCekStatus" class="modal" onclick="closeModal('modalCekStatus')">
+    <div class="modal-wrapper">
+        <div class="modal-content-box !max-w-[500px] border-[#FFD700]/20" onclick="event.stopPropagation()">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal('modalCekStatus')" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-slate-400 hover:text-white hover:bg-red-500/20 hover:text-red-500 transition-all duration-300">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Header -->
+            <div class="text-center mb-10">
+                <div class="w-20 h-20 bg-gradient-to-tr from-blue-600/20 to-blue-400/5 text-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl rotate-3">
+                    <i class="fas fa-id-card-alt text-3xl"></i>
+                </div>
+                <h3 class="text-white font-black text-2xl uppercase tracking-tighter">Status Pendaftaran</h3>
+                <p class="text-slate-400 text-[11px] mt-2 uppercase tracking-[0.2em] font-bold opacity-70">Verifikasi Data Calon Santri</p>
+            </div>
+            
+            <!-- Search Input Area -->
+            <div id="pencarian_container" class="space-y-4">
+                <div class="relative group">
+                    <i class="fas fa-user absolute left-5 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-[#FFD700] transition-colors"></i>
+                    <input type="text" id="cek_nik" 
+                        placeholder="NAMA AYAH / IBU" 
+                        class="w-full bg-black/40 border border-white/10 rounded-2xl py-5 pl-14 pr-6 text-white text-sm font-bold focus:border-[#FFD700] outline-none uppercase transition-all placeholder:text-slate-600 input-focus-glow">
+                </div>
+                
+                <button onclick="cariDataSantri()" id="btn_cari" 
+                    class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-5 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] hover:shadow-[0_10px_30px_rgba(37,99,235,0.4)] transition-all active:scale-[0.98] flex items-center justify-center gap-3">
+                    <span>Periksa Status</span>
+                    <i class="fas fa-arrow-right text-[10px]"></i>
+                </button>
+            </div>
+
+            <!-- Hasil Pencarian (Hidden by default) -->
+            <div id="hasil_cek" class="mt-8 hidden animate-fade-in">
+                <!-- Content injected by JS -->
+            </div>
+
+            <!-- Reset Button -->
+            <button id="btn_reset_cari" onclick="resetPencarian()" 
+                class="hidden w-full mt-8 py-3 text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] hover:text-[#FFD700] transition-all border-t border-white/5 pt-6">
+                <i class="fas fa-search-plus mr-2"></i> Cari Nama Lain
+            </button>
+        </div>
+    </div>
+</div>
+				
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+  <div class="max-w-6xl mx-auto px-4 mt-8 mb-10">
+    <div class="relative overflow-hidden glass-card rounded-[2.5rem] p-8 md:p-16 border-t-2 border-white/10 shadow-2xl hero-floating">
+        
+        <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#FFD700]/15 blur-[100px] rounded-full animate-glow-slow"></div>
+        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-green-500/15 blur-[100px] rounded-full animate-glow-slow" style="animation-delay: -5s;"></div>
+        
+        <div class="relative z-10 text-center max-w-3xl mx-auto">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FFD700] text-[10px] font-bold uppercase tracking-[0.3em] mb-6 animate-pulse">
+                Penerimaan Santri Baru 2026/2027
+            </span>
+            
+            <h2 class="text-3xl md:text-5xl font-black text-white leading-tight mb-6 uppercase tracking-tight">
+                Bersemi dalam Adab <br>
+                <span class="text-gold-gradient">Tumbuh dalam Prestasi</span>
+            </h2>
+            
+            <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-8 font-medium">
+                Jadilah bagian dari PP. Al-Hidayah Ketegan. Satukan langkah dalam harmoni pesantren yang menjunjung tinggi adab, mengukir prestasi terbaik, dan menumbuhkan kepedulian demi masa depan yang penuh keberkahan
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#form-pendaftaran" class="btn-primary px-8 py-3 rounded-full text-xs uppercase tracking-widest transition-transform hover:scale-110 active:scale-95 shadow-lg shadow-green-500/20">
+                    Mulai Pendaftaran
+                </a>
+                <button onclick="openModal('modalKegiatan')" class="bg-white/5 border border-white/10 px-8 py-3 rounded-full text-xs uppercase tracking-widest hover:bg-white/10 hover:border-white/30 transition-all active:scale-95">
+                    Lihat Program
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+	
+	<div class="max-w-6xl mx-auto px-4 mb-10">
+    <div class="glass-card p-8 rounded-[2rem] text-center border-t-2 border-[#FFD700]/30">
+        <h2 class="text-gold-gradient font-black uppercase tracking-[0.3em] text-sm mb-4">Visi & Misi</h2>
+        <div class="space-y-4">
+            <div>
+                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Visi</p>
+                <p class="text-lg font-semibold italic text-white">"Santri kuduk isok opo wae" (jadi santri harus bisa apa saja). "</p>
+            </div>
+            <div class="h-[1px] w-20 bg-white/10 mx-auto"></div>
+            <div>
+                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Misi</p>
+                <p class="text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">Mewujudkan santri multitalenta, berlandaskan Al-Qur'an & Hadits.</p>
+            </div>
+        </div>
+    </div>
+</div>
+	
+	<div class="max-w-6xl mx-auto px-6 py-16">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div class="max-w-xl">
+            <h3 class="text-white text-3xl font-light tracking-tight mb-2">
+                Informasi <span class="font-black text-[#FFD700]">Pendaftaran</span>
+            </h3>
+            <p class="text-subtle text-xs uppercase tracking-[0.2em]">Pusat Layanan Operasional PSB 2026/2027</p>
+        </div>
+        
+        <div class="clean-card px-6 py-4 rounded-2xl flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-[#FFD700]/10 flex items-center justify-center">
+                <i class="far fa-clock text-[#FFD700]"></i>
+            </div>
+            <div>
+                <p class="text-[10px] text-subtle font-bold uppercase tracking-widest">Waktu Operasional</p>
+                <p class="text-xs text-white font-semibold uppercase mt-0.5">08.00 WIB — 17.00 WIB</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-8 p-4 rounded-xl border-l-4 border-[#FFD700] bg-white/5">
+        <p class="text-xs text-slate-300 leading-relaxed italic">
+            * Pendaftaran dibuka sejak diumumkannya penerbitan brosur resmi PSB 2026-2027.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="clean-card rounded-[2rem] p-8 group">
+            <p class="text-[10px] text-[#FFD700] font-black uppercase tracking-[0.3em] mb-4">Komplek 01</p>
+            <h4 class="text-xl text-white font-bold mb-2">Putra Pusat</h4>
+            <p class="text-xs text-subtle leading-relaxed mb-6">Pusat Informasi & Administrasi Utama khusus pendaftar Putra.</p>
+            <div class="flex items-center gap-2 text-[10px] text-white font-bold uppercase tracking-tighter">
+                <i class="fas fa-map-marker-alt text-[#FFD700]"></i> 
+                <span>Ketegan, Sidoarjo</span>
+            </div>
+        </div>
+
+        <div class="clean-card rounded-[2rem] p-8 group">
+            <p class="text-[10px] text-pink-500 font-black uppercase tracking-[0.3em] mb-4">Komplek 02</p>
+            <h4 class="text-xl text-white font-bold mb-2">Putri Janubiyah</h4>
+            <p class="text-xs text-subtle leading-relaxed mb-6">Unit Layanan Pendaftaran khusus jenjang Madrasah Tsanawiyah (MTs).</p>
+            <div class="flex items-center gap-2 text-[10px] text-white font-bold uppercase tracking-tighter">
+                <i class="fas fa-map-marker-alt text-pink-500"></i> 
+                <span>Ketegan, Sidoarjo</span>
+            </div>
+        </div>
+
+        <div class="clean-card rounded-[2rem] p-8 group">
+            <p class="text-[10px] text-purple-500 font-black uppercase tracking-[0.3em] mb-4">Komplek 03</p>
+            <h4 class="text-xl text-white font-bold mb-2">Putri Syimaliyah</h4>
+            <p class="text-xs text-subtle leading-relaxed mb-6">Unit Layanan Pendaftaran khusus jenjang Madrasah Aliyah (MA).</p>
+            <div class="flex items-center gap-2 text-[10px] text-white font-bold uppercase tracking-tighter">
+                <i class="fas fa-map-marker-alt text-purple-500"></i> 
+                <span>Ketegan, Sidoarjo</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalKegiatan" class="modal" onclick="closeModal('modalKegiatan')">
+    <div class="glass-card p-6 md:p-12 rounded-[3.5rem] max-w-6xl w-[95%] max-h-[90vh] overflow-y-auto custom-scrollbar mx-auto border-t border-l border-white/20 shadow-2xl" onclick="event.stopPropagation()">
+        
+        <div class="text-center mb-12 relative">
+            <span class="text-[#FFD700] text-[10px] font-black uppercase tracking-[0.5em] mb-4 block opacity-70">Daily & Campus Life</span>
+            <h3 class="text-white font-black text-3xl md:text-4xl uppercase tracking-tighter">Rutinitas <span class="text-[#FFD700]">& Fasilitas</span></h3>
+            <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-[#FFD700]/5 blur-[80px] rounded-full -z-10"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <div class="lg:col-span-7">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-[2px] w-10 bg-[#FFD700]"></div>
+                    <h4 class="text-white font-black text-[11px] uppercase tracking-[0.2em]">Rutinitas Harian</h4>
+                </div>
+                
+                <div class="rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02]">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-white/5 border-b border-white/10">
+                                    <th class="p-4 text-[#FFD700] text-[10px] font-black uppercase tracking-widest">Waktu</th>
+                                    <th class="p-4 text-[#FFD700] text-[10px] font-black uppercase tracking-widest">Kegiatan</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-300 text-[10px] font-bold uppercase tracking-tight">
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">02.30 - 03.00</td>
+                                    <td class="p-3">Qiyamul Lail</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">03.00 - 03.52</td>
+                                    <td class="p-3">Persiapan jama'ah sholat subuh</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">03.52 - 04.50</td>
+                                    <td class="p-3">Sholat jama'ah subuh + Asmaul Husna</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">05.20 - 06.30</td>
+                                    <td class="p-3">Pengajian Tafsir, Tasawwuf + Sorogan</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">07.00 - 12.00</td>
+                                    <td class="p-3">Masuk sekolah formal</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">09.45 - 10.00</td>
+                                    <td class="p-3 italic text-slate-500">Istirahat sekolah</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">12.00 - 12.30</td>
+                                    <td class="p-3">Jama'ah sholat dhuhur dan Makan siang</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">12.30 - 13.30</td>
+                                    <td class="p-3">Sorogan Kitab & Al Qur'an</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">13.30 - 13.45</td>
+                                    <td class="p-3 italic text-slate-500">Qailulah</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">14.00 - 15.00</td>
+                                    <td class="p-3 text-[#FFD700]">Masuk Diniyah Jam ke – I</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">15.00 - 15.20</td>
+                                    <td class="p-3">Jama'ah sholat ashar + Membaca waqi'ah</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">15.20 - 16.00</td>
+                                    <td class="p-3 text-[#FFD700]">Masuk Diniyah Jam ke – II</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">16.00 - 17.00</td>
+                                    <td class="p-3 text-[#FFD700]">Masuk Diniyah Jam ke – III</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">17.05 - 18.20</td>
+                                    <td class="p-3">Makan sore dan Jama'ah sholat maghrib + yasin</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">18.20 - 19.04</td>
+                                    <td class="p-3 text-white">Muhafadzoh</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">19.04 - 19.30</td>
+                                    <td class="p-3">Jama'ah sholat isya'</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">19.30 - 20.00</td>
+                                    <td class="p-3">Tadarus Al – Qur'an (putri)</td>
+                                </tr>
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">20.00 - 21.00</td>
+                                    <td class="p-3 text-white">Sorogan dan Musyawaroh</td>
+                                </tr>
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="p-3 pl-4 text-blue-400">21.00 - 02.30</td>
+                                    <td class="p-3 italic text-slate-500">Istirahat</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-8">
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="h-[2px] w-10 bg-[#FFD700]"></div>
+                        <h4 class="text-white font-black text-[11px] uppercase tracking-[0.2em]">Aktifitas & Fasilitas</h4>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="p-5 rounded-3xl bg-white/[0.03] border border-white/10 group hover:border-[#FFD700]/30 transition-all">
+                            <h5 class="text-[#FFD700] text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <i class="fas fa-book-reader"></i> Akademik Pesantren
+                            </h5>
+                            <ul class="text-[9px] text-slate-400 font-bold uppercase space-y-2">
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Kajian Kitab-kitab Salaf Sidogiri</li>
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Metode Pembelajaran Al Miftah</li>
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Madrasah Diniyah</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-5 rounded-3xl bg-white/[0.03] border border-white/10 group hover:border-[#FFD700]/30 transition-all">
+                            <h5 class="text-blue-400 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <i class="fas fa-microchip"></i> Fasilitas & Lingkungan
+                            </h5>
+                            <ul class="text-[9px] text-slate-400 font-bold uppercase space-y-2">
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Laboratorium Komputer</li>
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Perpustakaan</li>
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Asrama</li>
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Kantin PPAH</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-5 rounded-3xl bg-white/[0.03] border border-white/10 group hover:border-[#FFD700]/30 transition-all">
+                            <h5 class="text-green-400 text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                                <i class="fas fa-star"></i> Pengembangan Diri
+                            </h5>
+                            <ul class="text-[9px] text-slate-400 font-bold uppercase space-y-2">
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Pencak Silat (Pa & Pi)</li>
+                                <li class="flex items-center gap-2"><span class="w-1 h-1 bg-slate-600 rounded-full"></span> Qiro’ah – Banjari (Hadrah)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-[2.5rem] bg-gradient-to-br from-[#FFD700]/10 to-transparent border border-[#FFD700]/20">
+                    <p class="text-[9px] text-slate-300 font-bold uppercase leading-relaxed text-center">
+                        Seluruh rutinitas dirancang untuk membentuk karakter santri yang beradab dan berilmu.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 flex justify-center">
+            <button onclick="closeModal('modalKegiatan')" class="px-12 py-4 rounded-2xl bg-white text-black font-black text-[10px] uppercase tracking-[0.4em] hover:bg-[#FFD700] transition-all hover:tracking-[0.5em] shadow-xl">
+                Close Info
+            </button>
+        </div>
+    </div>
+</div>	
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="info-card p-6 rounded-[2rem]">
+            <div class="icon-box">
+                <i class="fas fa-file-pdf text-red-500"></i>
+            </div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Brosur Sekolah</h4>
+            <p class="text-slate-400 text-[11px] leading-relaxed mb-6">Dapatkan informasi lengkap mengenai fasilitas, kurikulum, dan visi misi dalam format PDF.</p>
+           <a href="javascript:void(0)" onclick="openModal('modalBrosur')" class="inline-flex items-center gap-2 text-[#FFD700] text-[10px] font-black uppercase tracking-widest hover:gap-4 transition-all">
+    Unduh Sekarang <i class="fas fa-arrow-right"></i>
+</a>
+        </div>
+
+        <div class="info-card p-6 rounded-[2rem] cursor-pointer" onclick="openModal('modalSyarat')">
+            <div class="icon-box">
+                <i class="fas fa-clipboard-list text-blue-500"></i>
+            </div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Syarat Daftar</h4>
+            <p class="text-slate-400 text-[11px] leading-relaxed mb-6">Dokumen wajib: KK, Akte, KTP Orang Tua, Ijazah, dan Pas Foto terbaru pendaftar.</p>
+            <span class="text-[#FFD700] text-[10px] font-black uppercase tracking-widest">Lihat Detail</span>
+        </div>
+
+        <div class="info-card p-6 rounded-[2rem] cursor-pointer" onclick="openModal('modalBiayaDaftar')">
+            <div class="icon-box">
+                <i class="fas fa-wallet text-green-500"></i>
+            </div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Rincian Biaya</h4>
+            <p class="text-slate-400 text-[11px] leading-relaxed mb-6">Informasi biaya masuk, seragam, gedung, serta iuran bulanan masing-masing komplek.</p>
+            <span class="text-[#FFD700] text-[10px] font-black uppercase tracking-widest">Cek Rincian</span>
+        </div>
+
+        <div class="info-card p-6 rounded-[2rem] cursor-pointer" onclick="openModal('modalKegiatan')">
+            <div class="icon-box">
+                <i class="fas fa-calendar-alt text-purple-500"></i>
+            </div>
+            <h4 class="text-white font-bold text-sm uppercase tracking-wider mb-2">Info Kegiatan</h4>
+            <p class="text-slate-400 text-[11px] leading-relaxed mb-6">Jadwal harian santri, ekstrakurikuler, kajian kitab, dan agenda tahunan pondok.</p>
+            <span class="text-[#FFD700] text-[10px] font-black uppercase tracking-widest">Pelajari</span>
+        </div>
+
+    </div>
+</div>
+
+   <div class="max-w-6xl mx-auto px-4 mb-10">
+    <div class="glass-card p-6 rounded-[2rem] overflow-hidden">
+        <h3 class="text-center text-[#FFD700] font-bold uppercase tracking-widest text-xs mb-4">Ringkasan Total Biaya Pendaftaran</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left border-collapse">
+                <thead class="bg-white/5 text-[#FFD700] text-[10px] uppercase">
+                    <tr>
+                        <th class="p-4 border-b border-white/10">Tingkat Pendidikan</th>
+                        <th class="p-4 border-b border-white/10 text-right">Total (Putra)</th>
+                        <th class="p-4 border-b border-white/10 text-right">Total (Putri)</th>
+                    </tr>
+                </thead>
+                <tbody class="text-slate-300">
+                    <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                        <td class="p-4 font-semibold text-white">SDIQ UlughBek</td>
+                        <td class="p-4 text-right">Rp 1.700.000</td>
+                        <td class="p-4 text-right">Rp 1.865.000</td>
+                    </tr>
+                    <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                        <td class="p-4 font-semibold text-white">MTs Salafiyah</td>
+                        <td class="p-4 text-right">Rp 1.510.000</td>
+                        <td class="p-4 text-right">Rp 1.640.000</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="p-4 font-semibold text-white">MA Salafiyah</td>
+                        <td class="p-4 text-right">Rp 1.510.000</td>
+                        <td class="p-4 text-right">Rp 1.640.000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="modalBrosur" class="modal" onclick="closeModal('modalBrosur')">
+    <div class="glass-card p-5 md:p-8 rounded-[2rem] max-w-4xl w-[95%] max-h-[85vh] overflow-y-auto mx-auto" onclick="event.stopPropagation()">
+        
+        <div class="text-center mb-6">
+            <h3 class="text-[#FFD700] font-black text-xl uppercase tracking-[0.2em]">Digital Catalog</h3>
+            <p class="text-slate-400 text-[9px] uppercase tracking-widest mt-1">Pilih jenjang pendidikan</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <div class="group relative">
+                <div class="relative bg-white/5 border border-white/10 p-4 rounded-[1.5rem] text-center backdrop-blur-sm">
+                    <div class="aspect-square rounded-xl mb-3 flex flex-col items-center justify-center bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/20 relative overflow-hidden">
+                        <i class="fas fa-child text-3xl text-emerald-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-white font-black text-[10px] tracking-tighter opacity-50">SDIQ</span>
+                        <span class="text-white/5 font-black text-5xl absolute -bottom-2 -right-2 rotate-12">SD</span>
+                    </div>
+                    <a href="Brosursd.pdf" download class="block w-full py-2.5 bg-white/10 hover:bg-emerald-500 text-white rounded-xl font-bold text-[9px] uppercase tracking-widest transition-all border border-white/5">Unduh PDF</a>
+                </div>
+            </div>
+
+            <div class="group relative">
+                <div class="relative bg-black/40 border border-[#FFD700]/30 p-4 rounded-[1.5rem] text-center backdrop-blur-xl">
+                    <div class="aspect-square rounded-xl mb-3 flex flex-col items-center justify-center bg-gradient-to-br from-[#FFD700]/10 to-transparent border border-[#FFD700]/20 relative overflow-hidden">
+                        <i class="fas fa-graduation-cap text-3xl text-[#FFD700] mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-white font-black text-[10px] tracking-tighter opacity-50">MTs / MA</span>
+                        <span class="text-white/5 font-black text-5xl absolute -bottom-2 -right-2 rotate-12">MTS</span>
+                    </div>
+                    <a href="Brosurmts.pdf" download class="block w-full py-2.5 bg-[#FFD700] text-black rounded-xl font-bold text-[9px] uppercase tracking-widest transition-all shadow-lg shadow-[#FFD700]/20">Unduh PDF</a>
+                </div>
+            </div>
+
+            <div class="group relative">
+                <div class="relative bg-white/5 border border-white/10 p-4 rounded-[1.5rem] text-center backdrop-blur-sm">
+                    <div class="aspect-square rounded-xl mb-3 flex flex-col items-center justify-center bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 relative overflow-hidden">
+                        <i class="fas fa-laptop-code text-3xl text-blue-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-white font-black text-[10px] tracking-tighter opacity-50">SMK</span>
+                        <span class="text-white/5 font-black text-5xl absolute -bottom-2 -right-2 rotate-12">SMK</span>
+                    </div>
+                    <a href="Brosursmk.pdf" download class="block w-full py-2.5 bg-white/10 hover:bg-blue-500 text-white rounded-xl font-bold text-[9px] uppercase tracking-widest transition-all border border-white/5">Unduh PDF</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-8 flex justify-center">
+            <button onclick="closeModal('modalBrosur')" class="text-slate-500 font-bold text-[9px] uppercase tracking-[0.2em] hover:text-white transition-all py-2 px-6 border border-white/5 rounded-full">
+                Tutup
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="modalSyarat" class="modal" onclick="closeModal('modalSyarat')">
+    <div class="glass-card p-6 md:p-10 rounded-[3rem] max-w-5xl w-[95%] max-h-[90vh] overflow-y-auto custom-scrollbar mx-auto border border-white/10" onclick="event.stopPropagation()">
+        
+        <div class="text-center mb-10">
+            <h3 class="text-[#FFD700] font-black text-2xl uppercase tracking-[0.3em]">Syarat Pendaftaran & Perlengkapan Santri</h3>
+            <p class="text-slate-500 text-[9px] uppercase tracking-widest mt-2">Syarat Pendaftaran & Ketentuan Perlengkapan</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-5 space-y-6">
+                <div class="p-6 md:p-8 rounded-[2.5rem] bg-white/5 border border-white/10 h-full">
+                    <h4 class="text-white font-black text-[10px] uppercase tracking-widest mb-6 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-[#FFD700] rounded-full"></span> Syarat Administrasi
+                    </h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">1.</span> Sowan ke Pengasuh.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">2.</span> Mengisi Formulir Pendaftaran yang telah disediakan.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">3.</span> Foto Copy KTP Orang Tua / Wali Santri Masing-masing 6 Lembar.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">4.</span> Foto copy KK 6 Lembar.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">5.</span> Foto copy Akta Kelahiran 6 Lembar.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">6.</span> Pas foto 3X4 10 Lembar (berwarna, background biru, bertakwa putih dan berpeci hitam (Pa.) / berkerudung hitam (Pi.)).
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">7.</span> Foto copy Ijazah Sekolah yang telah dilegalisir 2 Lembar.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">8.</span> Foto copy SKHUN (diknas) 2 Lembar.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">9.</span> Foto copy NISN 3 Lembar.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">10.</span> Membayar Biaya Pendaftaran.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">11.</span> Mengisi Surat Pernyataan Bermaterai yang disediakan.
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-wide leading-relaxed">
+                            <span class="text-[#FFD700]">12.</span> Mengikuti Seleksi Penentuan Martabah Diniyah.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6">
+                <div class="p-6 rounded-[2.5rem] bg-gradient-to-br from-white/5 to-transparent border border-white/10">
+                    <h4 class="text-blue-400 font-black text-[10px] uppercase tracking-widest flex items-center gap-2 mb-6">
+                        <i class="fas fa-mars"></i> Perlengkapan Putra
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Semua Santri dibatasi membawa pakaian maksimal 5 Stel kecuali handuk dan sajadah, ditambah 5 potong baju putih polos (taqwa / lengan panjang).</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Semua perlengkapan wajib diberi nama permanent (dengan spidol / bordir).</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Santri dilarang membawa almari.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Wajib membawa Al Qur'an Terjemah (Al Qudus).</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Membawa kamus Bahasa arab & kamus Bahasa inggris.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-red-400 font-black uppercase tracking-tight leading-relaxed italic">
+                            <i class="fas fa-ban mt-1"></i>
+                            <span>Dilarang membawa barang-barang elektronik.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-[2.5rem] bg-gradient-to-br from-[#FFD700]/5 to-transparent border border-[#FFD700]/20">
+                    <h4 class="text-[#FFD700] font-black text-[10px] uppercase tracking-widest flex items-center gap-2 mb-6">
+                        <i class="fas fa-venus"></i> Perlengkapan Putri
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Mukena putih panjang (terusan).</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Baju max 5 Stel (bukan hem / press body).</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Kaos & Celana tidur (panjang).</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Dilarang mexi belahan.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Kerudung putih, Sarung 2 & Bantal dll.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Wajib membawa Al Qur'an Terjemah (Al Qudus).</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-slate-300 font-bold uppercase tracking-tight leading-relaxed border-b border-white/5 pb-2">
+                            <i class="fas fa-check text-[#FFD700] mt-1"></i>
+                            <span>Membawa kamus Bhs Arab & kamus bhs Inggris.</span>
+                        </li>
+                        <li class="flex items-start gap-3 text-[9px] text-red-400 font-black uppercase tracking-tight leading-relaxed italic">
+                            <i class="fas fa-ban mt-1"></i>
+                            <span>Dilarang membawa barang-barang elektronik.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 flex justify-center">
+            <button onclick="closeModal('modalSyarat')" class="px-12 py-3 rounded-full bg-white text-black font-black text-[10px] uppercase tracking-[0.3em] hover:bg-[#FFD700] transition-all hover:scale-105 shadow-xl">
+                Selesai Membaca
+            </button>
+        </div>
+    </div>
+</div>
+
+ <div id="modalBiayaDaftar" class="modal" onclick="closeModal('modalBiayaDaftar')">
+    <div class="glass-card p-6 md:p-10 rounded-[2.5rem] max-w-6xl w-full max-h-[95vh] overflow-y-auto" onclick="event.stopPropagation()">
+        
+        <div class="text-center mb-8">
+            <h3 class="text-[#FFD700] font-black text-2xl uppercase tracking-[0.3em]">Biaya Pendaftaran Pondok & Sekolah</h3>
+            <p class="text-slate-400 text-[10px] uppercase tracking-widest mt-2">Rincian biaya pendaftaran Pondok dan Sekolah </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2 mb-8 bg-white/5 p-2 rounded-2xl border border-white/10">
+            <button onclick="switchTab('tab-pendaftaran')" class="tab-btn active px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all">Pendaftaran Awal</button>
+            <button onclick="switchTab('tab-bulanan')" class="tab-btn px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-widest transition-all">Bulanan Pondok</button>
+        </div>
+
+        <div id="tab-pendaftaran" class="tab-content">
+<div class="mb-12">
+    <h3 class="text-green-400 font-black text-xs uppercase tracking-[0.3em] mb-6 border-l-4 border-green-500 pl-4">MTs & MA Salafiyah</h3>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <div class="space-y-4">
+            <h4 class="text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 px-2">
+                <i class="fas fa-mosque text-green-400"></i> Administrasi Pondok
+            </h4>
+            <div class="overflow-x-auto rounded-3xl border border-green-500/20 bg-black/40">
+                <table class="w-full text-[9px] md:text-[10px] text-left uppercase">
+                    <thead class="text-green-400 bg-green-500/10">
+                        <tr><th class="p-4">Perincian</th><th class="p-4 text-right">Putra</th><th class="p-4 text-right">Putri</th></tr>
+                    </thead>
+                    <tbody class="text-slate-300 divide-y divide-white/5">
+                        <tr><td class="p-3">Pendaftaran Pondok</td><td class="text-right p-3">25.000</td><td class="text-right p-3">25.000</td></tr>
+                        <tr><td class="p-3">Pendaftaran Diniyah</td><td class="text-right p-3">25.000</td><td class="text-right p-3">25.000</td></tr>
+                        <tr><td class="p-3">Syahriyah Pondok (1 Bln)</td><td class="text-right p-3">30.000</td><td class="text-right p-3">30.000</td></tr>
+                        <tr><td class="p-3">Air Minum (1 Bln)</td><td class="text-right p-3">10.000</td><td class="text-right p-3">10.000</td></tr>
+                        <tr><td class="p-3">Kos Makan (1 Bln)</td><td class="text-right p-3">250.000</td><td class="text-right p-3">255.000</td></tr>
+                        <tr><td class="p-3">I'anah Diniyah (1 Bln)</td><td class="text-right p-3">45.000</td><td class="text-right p-3">50.000</td></tr>
+                        <tr><td class="p-3">Acara Tahunan (1 Bln)</td><td class="text-right p-3">35.000</td><td class="text-right p-3">35.000</td></tr>
+                        <tr><td class="p-3">Seragam Pondok</td><td class="text-right p-3">200.000</td><td class="text-right p-3">190.000</td></tr>
+                        <tr><td class="p-3">Seragam Diniyah</td><td class="text-right p-3">150.000</td><td class="text-right p-3">110.000</td></tr>
+                        <tr><td class="p-3">Jilbab Pondok</td><td class="text-right p-3">-</td><td class="text-right p-3">60.000</td></tr>
+                        <tr><td class="p-3">Rapot Diniyah</td><td class="text-right p-3">50.000</td><td class="text-right p-3">50.000</td></tr>
+                        <tr><td class="p-3">Infaq Pondok Pesantren</td><td class="text-right p-3">100.000</td><td class="text-right p-3">100.000</td></tr>
+                        <tr><td class="p-3">Bea Almari Pesantren</td><td class="text-right p-3">120.000</td><td class="text-right p-3">120.000</td></tr>
+                        <tr><td class="p-3">Kartu Kunjung, Buku, dll</td><td class="text-right p-3">50.000</td><td class="text-right p-3">90.000</td></tr>
+                        <tr class="bg-green-500/20 text-white font-black">
+                            <td class="p-4">TOTAL PONDOK</td>
+                            <td class="text-right p-4">1.090.000</td>
+                            <td class="text-right p-4">1.150.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <h4 class="text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 px-2">
+                <i class="fas fa-school text-green-400"></i> Administrasi Sekolah
+            </h4>
+            <div class="overflow-x-auto rounded-3xl border border-green-500/20 bg-black/40">
+                <table class="w-full text-[9px] md:text-[10px] text-left uppercase">
+                    <thead class="text-green-400 bg-green-500/10">
+                        <tr><th class="p-4">Perincian</th><th class="p-4 text-right">Putra</th><th class="p-4 text-right">Putri</th></tr>
+                    </thead>
+                    <tbody class="text-slate-300 divide-y divide-white/5">
+                        <tr><td class="p-3">Pendaftaran</td><td class="text-right p-3">200.000</td><td class="text-right p-3">200.000</td></tr>
+                        <tr><td class="p-3">Seragam Khas + Atribut</td><td class="text-right p-3">140.000</td><td class="text-right p-3">140.000</td></tr>
+                        <tr><td class="p-3">Kaos Olahraga</td><td class="text-right p-3">80.000</td><td class="text-right p-3">-</td></tr>
+                        <tr><td class="p-3">Tiga Jilbab Madrasah</td><td class="text-right p-3">-</td><td class="text-right p-3">150.000</td></tr>
+                        <tr class="bg-green-500/20 text-white font-black">
+                            <td class="p-4">TOTAL SEKOLAH</td>
+                            <td class="text-right p-4">420.000</td>
+                            <td class="text-right p-4">490.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="border-white/10 my-10">
+
+<div class="mb-12">
+    <h3 class="text-red-500 font-black text-xs uppercase tracking-[0.3em] mb-6 border-l-4 border-red-500 pl-4">SDIQ Ulughbek</h3>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <div class="space-y-4">
+            <h4 class="text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 px-2">
+                <i class="fas fa-mosque text-red-500"></i> Administrasi Pondok
+            </h4>
+            <div class="overflow-x-auto rounded-3xl border border-red-500/20 bg-black/40">
+                <table class="w-full text-[9px] md:text-[10px] text-left uppercase">
+                    <thead class="text-red-500 bg-red-500/10">
+                        <tr><th class="p-4">Perincian</th><th class="p-4 text-right">Putra</th><th class="p-4 text-right">Putri</th></tr>
+                    </thead>
+                    <tbody class="text-slate-300 divide-y divide-white/5">
+                        <tr><td class="p-3">Pendaftaran Pondok</td><td class="text-right p-3">25.000</td><td class="text-right p-3">25.000</td></tr>
+                        <tr><td class="p-3">Pendaftaran Diniyah</td><td class="text-right p-3">25.000</td><td class="text-right p-3">25.000</td></tr>
+                        <tr><td class="p-3">Syahriyah Pondok (1 Bln)</td><td class="text-right p-3">30.000</td><td class="text-right p-3">30.000</td></tr>
+                        <tr><td class="p-3">Air Minum (1 Bln)</td><td class="text-right p-3">10.000</td><td class="text-right p-3">10.000</td></tr>
+                        <tr><td class="p-3">Kos Makan (1 Bln)</td><td class="text-right p-3">375.000</td><td class="text-right p-3">375.000</td></tr>
+                        <tr><td class="p-3">I'anah Diniyah (1 Bln)</td><td class="text-right p-3">45.000</td><td class="text-right p-3">50.000</td></tr>
+                        <tr><td class="p-3">Acara Tahunan (1 Bln)</td><td class="text-right p-3">35.000</td><td class="text-right p-3">35.000</td></tr>
+                        <tr><td class="p-3">Seragam Pondok</td><td class="text-right p-3">200.000</td><td class="text-right p-3">190.000</td></tr>
+						<tr><td class="p-3">Bea Cuci Baju 1 bulan</td><td class="text-right p-3">60.000<td class="text-right p-3">70.000</td></tr>
+                        <tr><td class="p-3">Seragam Diniyah</td><td class="text-right p-3">150.000</td><td class="text-right p-3">110.000</td></tr>
+                        <tr><td class="p-3">Jilbab Pondok</td><td class="text-right p-3">-</td><td class="text-right p-3">60.000</td></tr>
+                        <tr><td class="p-3">Rapot Diniyah</td><td class="text-right p-3">50.000</td><td class="text-right p-3">50.000</td></tr>
+                        <tr><td class="p-3">Infaq Pondok Pesantren</td><td class="text-right p-3">100.000</td><td class="text-right p-3">100.000</td></tr>
+                        <tr><td class="p-3">Bea Almari Pesantren</td><td class="text-right p-3">120.000</td><td class="text-right p-3">120.000</td></tr>
+                        <tr><td class="p-3">Kartu Kunjung, Buku, dll</td><td class="text-right p-3">50.000</td><td class="text-right p-3">70.000</td></tr>
+                        <tr class="bg-red-500/20 text-white font-black">
+                            <td class="p-4">TOTAL PONDOK</td>
+                            <td class="text-right p-4">1.275.000</td>
+                            <td class="text-right p-4">1.320.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="space-y-4">
+            <h4 class="text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 px-2">
+                <i class="fas fa-school text-red-500"></i> Administrasi Sekolah
+            </h4>
+            <div class="overflow-x-auto rounded-3xl border border-red-500/20 bg-black/40">
+                <table class="w-full text-[9px] md:text-[10px] text-left uppercase">
+                    <thead class="text-red-500 bg-red-500/10">
+                        <tr><th class="p-4">Perincian</th><th class="p-4 text-right">Putra</th><th class="p-4 text-right">Putri</th></tr>
+                    </thead>
+                    <tbody class="text-slate-300 divide-y divide-white/5">
+                        <tr><td class="p-3">Pendaftaran</td><td class="text-right p-3">200.000</td><td class="text-right p-3">200.000</td></tr>
+                        <tr><td class="p-3">Atribut + Rapot</td><td class="text-right p-3">135.000</td><td class="text-right p-3">135.000</td></tr>
+                        <tr><td class="p-3">Kaos Olahraga</td><td class="text-right p-3">90.000</td><td class="text-right p-3">90.000</td></tr>
+                        <tr><td class="p-3">Tiga Jilbab Madrasah</td><td class="text-right p-3">-</td><td class="text-right p-3">120.000</td></tr>
+                        <tr class="bg-red-500/20 text-white font-black">
+                            <td class="p-4">TOTAL SEKOLAH</td>
+                            <td class="text-right p-4">425.000</td>
+                            <td class="text-right p-4">545.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+
+        <div id="tab-bulanan" class="tab-content hidden">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+     <div class="p-6 rounded-[2rem] bg-white/5 border border-green-500/20 text-center">
+        <h5 class="text-green-400 font-black text-[10px] uppercase mb-4 tracking-tighter">Reguler Putra (MTs/MA)</h5>
+        <div class="space-y-1 text-[9px] text-slate-400 uppercase mb-4">
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Syahriyah Pondok</span><span>30rb</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Air Minum</span><span>10rb</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Kos Makan 2x1 hari</span><span>250rb</span></div>
+            <div class="flex justify-between"><span>I'anah Diniyah</span><span>45rb</span></div>
+			<div class="flex justify-between"><span>Acara Tahunan</span><span>35rb</span></div>
+			<div class="flex justify-between"><span>-</span><span>-</span></div>
+        </div>
+        <div class="bg-green-500 text-black rounded-xl py-2 font-black text-xs">Rp 370.000</div>
+    </div>
+
+    <div class="p-6 rounded-[2rem] bg-white/5 border border-green-500/20 text-center">
+        <h5 class="text-green-400 font-black text-[10px] uppercase mb-4 tracking-tighter">Reguler Putri (MTs/MA)</h5>
+        <div class="space-y-1 text-[9px] text-slate-400 uppercase mb-4">
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Syahriyah Pondok</span><span>30rb</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Air Minum</span><span>10rb</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Kos Makan 2x1 hari</span><span>255rb</span></div>
+            <div class="flex justify-between"><span>I'anah Diniyah</span><span>50rb</span></div>
+			<div class="flex justify-between"><span>Acara Tahunan</span><span>35rb</span></div>
+			<div class="flex justify-between"><span>-</span><span>-</span></div>
+        </div>
+        <div class="bg-green-500 text-black rounded-xl py-2 font-black text-xs">Rp 380.000</div>
+    </div>
+
+     <div class="p-6 rounded-[2rem] bg-white/5 border border-blue-500/20 text-center">
+       <h5 class="text-blue-400 font-black text-[10px] uppercase mb-4 tracking-tighter">Imtiyaz Putri (7A4/7A5)</h5>
+        <div class="space-y-1 text-[9px] text-slate-400 uppercase mb-4">
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Syahriyah Pondok</span><span>30rb</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Air Minum</span><span>10rb</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Kos Makan 3x1 hari</span><span>310rb</span></div>
+            <div class="flex justify-between"><span>I'anah Diniyah</span><span>50rb</span></div>
+			<div class="flex justify-between"><span>Acara Tahunan</span><span>35rb</span></div>
+			<div class="flex justify-between"><span>-</span><span>-</span></div>
+        </div>
+<div class="bg-blue-500 text-white rounded-xl py-2 font-black text-xs">Rp 435.000</div>
+    </div>
+
+     <div class="p-6 rounded-[2rem] bg-white/5 border border-red-500/20 text-center">
+       <h5 class="text-red-500 font-black text-[10px] uppercase mb-4 tracking-tighter">SDIQ (Pa / Pi)</h5>
+        <div class="space-y-1 text-[9px] text-slate-400 uppercase mb-4">
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Syahriyah Pondok</span><span>30rb</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Air Minum</span><span>10rb</span></div>
+            <div class="flex justify-between border-b border-white/5 pb-1"><span>Kos Makan 3x1 hari</span><span>375rb</span></div>
+			<div class="flex justify-between"><span>Bea Cuci Baju</span><span>60/70rb</span></div>
+            <div class="flex justify-between"><span>I'anah Diniyah</span><span>45/50rb</span></div>
+			<div class="flex justify-between"><span>Acara Tahunan</span><span>35rb</span></div>
+        </div>
+        <div class="bg-red-500 text-white rounded-xl py-2 font-black text-xs">Rp 555rb / 570rb</div>
+    </div>
+</div>
+        </div>
+
+        <div class="mt-10 flex justify-center">
+            <button onclick="closeModal('modalBiayaDaftar')" class="px-10 py-4 rounded-full bg-white text-black font-black text-[10px] uppercase tracking-[0.2em] hover:bg-[#FFD700] hover:scale-105 transition-all shadow-xl shadow-black/20">
+                Selesai Membaca
+            </button>
+        </div>
+    </div>
+</div>
+
+
+    <div id="form-pendaftaran" class="max-w-4xl mx-auto px-4">
+        <div class="glass-card p-6 md:p-10 rounded-[2.5rem] shadow-2xl mb-20">
+            <div class="mb-10">
+                <span class="inline-block px-3 py-1 bg-gold/10 text-[#FFD700] text-[10px] font-bold rounded-full mb-3 uppercase tracking-widest">Tahun Ajaran 2026/2027</span>
+                <h2 class="text-3xl font-bold leading-tight">Registrasi Santri Baru</h2>
+                <p class="text-slate-400 text-sm mt-2 font-light italic">Silakan lengkapi formulir di bawah ini dengan data yang valid.</p>
+            </div>
+
+            <form id="regForm" class="space-y-12">
+                <section>
+                    <div class="section-header">
+                        <h3 class="text-lg font-bold text-white uppercase tracking-wide">I. Data Diri Santri</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Nama Lengkap</label>
+                            <input type="text" name="nama" class="input-style w-full p-3.5 rounded-xl text-sm" placeholder="Sesuai Akte" required>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-slate-400 uppercase px-1">NISN</label>
+                            <input type="number" name="nisn" class="input-style w-full p-3.5 rounded-xl text-sm" placeholder="10 Digit" required>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Tempat Lahir</label>
+                                <input type="text" name="tempat_lahir" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Tgl Lahir</label>
+                                <input type="date" name="tgl_lahir" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Jenis Kelamin</label>
+                            <select name="gender" class="input-style w-full p-3.5 rounded-xl text-sm">
+                                <option value="Laki-laki">Putra (Laki-laki)</option>
+                                <option value="Perempuan">Putri (Perempuan)</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="space-y-1.5">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase">Anak Ke</label>
+                                <input type="number" name="anak_ke" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase px-1">Kandung</label>
+                                <input type="number" name="sd_kandung" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase px-1">Tiri</label>
+                                <input type="number" name="sd_tiri" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Kelas Tujuan</label>
+                            <input type="text" name="kelas" class="input-style w-full p-3.5 rounded-xl text-sm" placeholder="Contoh: 7 SMP / 10 SMA">
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="section-header">
+                        <h3 class="text-lg font-bold text-white uppercase tracking-wide">II. Data Orang Tua</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-4">
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Nama Ayah</label>
+                                <input type="text" name="nama_ayah" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Pendidikan Ayah</label>
+                                <input type="text" name="edu_ayah" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Pekerjaan Ayah</label>
+                                <input type="text" name="job_ayah" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">No. HP Ayah (WA)</label>
+                                <input type="tel" name="telp_ayah" class="input-style w-full p-3.5 rounded-xl text-sm" placeholder="08...">
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Nama Ibu</label>
+                                <input type="text" name="nama_ibu" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Pendidikan Ibu</label>
+                                <input type="text" name="edu_ibu" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Pekerjaan Ibu</label>
+                                <input type="text" name="job_ibu" class="input-style w-full p-3.5 rounded-xl text-sm">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[11px] font-bold text-slate-400 uppercase px-1">No. HP Ibu (WA)</label>
+                                <input type="tel" name="telp_ibu" class="input-style w-full p-3.5 rounded-xl text-sm" placeholder="08...">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="section-header">
+                        <h3 class="text-lg font-bold text-white uppercase tracking-wide">III. Alamat & Berkas</h3>
+                    </div>
+                    <div class="space-y-5">
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Asal Sekolah</label>
+                            <input type="text" name="asal_sekolah" class="input-style w-full p-3.5 rounded-xl text-sm" placeholder="Nama sekolah sebelumnya">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold text-slate-400 uppercase px-1">Alamat Lengkap</label>
+                            <textarea name="alamat" rows="3" class="input-style w-full p-3.5 rounded-xl text-sm" placeholder="Jalan, No. Rumah, RT/RW, Kec, Kota"></textarea>
+                        </div>
+                        
+                        <div class="p-6 bg-white/5 rounded-[2rem] border border-white/5">
+                            <p class="text-[11px] font-bold text-[#FFD700] uppercase mb-6 text-center tracking-widest">Upload Dokumen (Foto/PDF)</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-slate-400 uppercase font-semibold">Kartu Keluarga</label>
+                                    <input type="file" id="f_kk" class="text-[10px] block w-full file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-white/10 file:text-white">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-slate-400 uppercase font-semibold">Akte Lahir</label>
+                                    <input type="file" id="f_akte" class="text-[10px] block w-full file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-white/10 file:text-white">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-slate-400 uppercase font-semibold">KTP Ayah</label>
+                                    <input type="file" id="f_ktp_ayah" class="text-[10px] block w-full file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-white/10 file:text-white">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-slate-400 uppercase font-semibold">KTP Ibu</label>
+                                    <input type="file" id="f_ktp_ibu" class="text-[10px] block w-full file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-white/10 file:text-white">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-slate-400 uppercase font-semibold">Ijazah / SKL</label>
+                                    <input type="file" id="f_ijazah" class="text-[10px] block w-full file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-white/10 file:text-white">
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-[10px] text-[#FFD700] uppercase font-bold">Pas Foto Santri</label>
+                                    <input type="file" id="f_santri" class="text-[10px] block w-full file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[10px] file:font-semibold file:bg-gold/20 file:text-[#FFD700]">
+                                </div>
+								
+                            </div>
+                        </div>
+                    </div>
+                </section>
+				
+<div class="space-y-4 pt-4 border-t border-white/5">
+    <h4 class="text-[#FFD700] text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+        <i class="fas fa-receipt"></i> Bukti Administrasi Pendaftaran
+    </h4>
+    <div class="relative group">
+        <input type="file" name="file_bukti" id="f_bukti" accept="image/*" class="hidden" required 
+               onchange="updateFileName(this, 'file-name-display')">
+        <label for="f_bukti" class="flex flex-col items-center justify-center p-6 border-2 border-dashed border-white/10 rounded-[2rem] bg-white/[0.02] hover:bg-white/[0.05] hover:border-[#FFD700]/50 transition-all cursor-pointer group-hover:scale-[1.01]">
+            <i class="fas fa-cloud-upload-alt text-2xl text-slate-500 mb-2 group-hover:text-[#FFD700]"></i>
+            <span id="file-name-display" class="text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center">
+                Upload Bukti Transfer<br><span class="text-[8px] opacity-50 font-light">(Klik untuk memilih file)</span>
+            </span>
+        </label>
+    </div>
+</div>
+
+                <div class="pt-6">
+                    <button type="submit" id="submitBtn" class="btn-primary w-full py-4 rounded-2xl text-sm uppercase font-black tracking-[0.2em] hover:scale-[1.02] active:scale-[0.98] transition-all flex justify-center items-center gap-3">
+    <span id="btnText">Kirim Formulir Sekarang</span>
+    <div id="loaderSign" class="hidden w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></div>
+</button>
+                    <p class="text-[10px] text-slate-500 text-center mt-4 uppercase tracking-tighter">Dengan mengirim, Anda&nbsp;menyetujui&nbsp;syarat&nbsp;&&nbsp;ketentuan&nbsp;Al-Hidayah</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+ <footer class="mt-20 border-t border-white/5 bg-black/40 backdrop-blur-xl pt-16 pb-8">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            
+            <div class="col-span-1">
+                <div class="flex items-center gap-3 mb-6 grayscale opacity-70 hover:opacity-100 transition-opacity">
+                    <img src="Logoalhidayah.png" alt="Logo" class="w-12 h-12 object-contain">
+                    <div class="leading-tight">
+                        <h4 class="font-bold text-white text-sm tracking-tighter uppercase">PP. Al-Hidayah</h4>
+                        <p class="text-[10px] text-slate-400 font-bold tracking-widest uppercase">Ketegan Sidoarjo</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed font-medium mb-6">
+                    Lembaga pendidikan Islam terpadu yang berdedikasi mencetak generasi Qur'ani dan Multitalenta.
+                </p>
+                
+                <h4 class="text-white text-[11px] font-bold uppercase tracking-[0.2em] mb-4">Gabung Grup WA Wali Santri</h4>
+                <div class="flex flex-col gap-2">
+                    <a href="https://chat.whatsapp.com/HuxZ9i9RhA23ZKrZU2BJki" class="flex items-center justify-between bg-green-600/10 hover:bg-green-600 border border-green-500/20 px-4 py-2.5 rounded-xl text-green-500 hover:text-white transition-all group">
+                        <span class="text-[10px] font-bold uppercase tracking-widest">Putra Baru 2026</span>
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="flex items-center justify-between bg-pink-600/10 hover:bg-pink-600 border border-pink-500/20 px-4 py-2.5 rounded-xl text-pink-500 hover:text-white transition-all group">
+                        <span class="text-[10px] font-bold uppercase tracking-widest">Putri Baru 2026</span>
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-span-1 md:col-span-2">
+                <h4 class="text-white text-[11px] font-bold uppercase tracking-[0.2em] mb-6 border-l-2 border-[#FFD700] pl-3">Pusat Informasi & Kontak Unit</h4>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                    <div class="space-y-3">
+                        <p class="text-[9px] text-[#FFD700] font-black uppercase tracking-widest pb-1 border-b border-white/5">Area Pondok Pesantren</p>
+                        <a href="https://wa.me/6282338863341" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Putra Induk</span>
+                            <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded italic group-hover:bg-white/10">Admin</span>
+                        </a>
+                        <a href="https://wa.me/6281357902507" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Putri MTs (Janubiyah)</span>
+                            <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded italic group-hover:bg-white/10">Admin</span>
+                        </a>
+                        <a href="https://wa.me/6282140076233" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Putri MA (Syimaliyah)</span>
+                            <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded italic group-hover:bg-white/10">Admin</span>
+                        </a>
+                        <a href="https://wa.me/6285755470621" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Putri SDIQ / Shibyan</span>
+                            <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded italic group-hover:bg-white/10">Admin</span>
+                        </a>
+                        <a href="https://wa.me/6281556442572" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Putra SDIQ / ABA</span>
+                            <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded italic group-hover:bg-white/10">Admin</span>
+                        </a>
+                        <a href="https://wa.me/62895336050006" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Perkuliahan</span>
+                            <span class="text-[10px] bg-white/5 px-2 py-0.5 rounded italic group-hover:bg-white/10">Admin</span>
+                        </a>
+                    </div>
+
+                    <div class="space-y-3 mt-6 sm:mt-0">
+                        <p class="text-[9px] text-green-500 font-black uppercase tracking-widest pb-1 border-b border-white/5">Kepala Lembaga</p>
+                        <a href="https://wa.me/6282333934558" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Kepala Sekolah MTs</span>
+                            <i class="fas fa-chevron-right text-[8px] opacity-0 group-hover:opacity-100 transition-all"></i>
+                        </a>
+                        <a href="https://wa.me/6285645916577" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Kepala Sekolah MA</span>
+                            <i class="fas fa-chevron-right text-[8px] opacity-0 group-hover:opacity-100 transition-all"></i>
+                        </a>
+                        <a href="https://wa.me/6281272153253" class="flex justify-between items-center text-[11px] text-slate-400 hover:text-white group">
+                            <span class="font-semibold">Kepala Sekolah SMK</span>
+                            <i class="fas fa-chevron-right text-[8px] opacity-0 group-hover:opacity-100 transition-all"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+            <p class="text-[9px] text-slate-600 font-bold uppercase tracking-[0.2em]">
+                &copy; 2026 <span class="text-slate-400">PP. Al-Hidayah Ketegan</span>
+            </p>
+            <div class="flex gap-6 text-[9px] text-slate-600 font-bold uppercase tracking-widest">
+                <span>Ketegan - Tanggulangin - Sidoarjo</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <div id="loader" class="hidden fixed inset-0 bg-black/95 backdrop-blur-xl flex items-center justify-center z-50">
+        <div class="text-center">
+            <div class="w-12 h-12 border-2 border-[#FFD700]/20 border-t-[#FFD700] rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-[#FFD700] text-[10px] font-bold tracking-[0.3em] uppercase animate-pulse">Sedang Mengirim Data</p>
+        </div>
+    </div>
+
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    /**
+     * 1. KONFIGURASI GLOBAL
+     */
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyrT5MkOjO_zhMxpvepwU5cyOknwwS-835zqO6HpHbZEoLwnpPjX7dHd4cewbgoB4SCxw/exec';
+
+    /**
+     * 2. MODAL & TAB CONTROL
+     */
+   function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Body tetap mati
+        modal.scrollTop = 0; // Pastikan saat buka, scroll modal balik ke atas
+    }
+}
+
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        const targetTab = document.getElementById(tabId);
+        if (targetTab) {
+            targetTab.classList.remove('hidden');
+            event.currentTarget.classList.add('active');
+        }
+    }
+
+    function updateFileName(input, targetId) {
+        const fileName = input.files[0] ? input.files[0].name : "Upload Bukti Transfer";
+        const target = document.getElementById(targetId);
+        if (target) {
+            target.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-2"></i> ${fileName}`;
+        }
+    }
+
+    /**
+     * 3. SWIPER CONFIGURATION
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+        new Swiper(".mySwiper", {
+            loop: true,
+            autoplay: { delay: 4000 },
+            pagination: { el: ".swiper-pagination", clickable: true },
+        });
+
+        new Swiper(".brosurSwiper", {
+            loop: true,
+            autoplay: { delay: 2500, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+        });
+    });
+
+    /**
+     * 4. FITUR CEK STATUS (PREMIUM LOOK)
+     */
+    async function cariDataSantri() {
+        const searchVal = document.getElementById('cek_nik').value;
+        const btn = document.getElementById('btn_cari');
+        const display = document.getElementById('hasil_cek');
+        const containerCari = document.getElementById('pencarian_container');
+        const btnReset = document.getElementById('btn_reset_cari');
+        
+        if(!searchVal) return alert('Silakan masukkan nama orang tua terlebih dahulu');
+        
+        // State: Loading
+        btn.disabled = true;
+        btn.innerHTML = '<div class="loader-spinner"></div> <span>Mencari Data...</span>';
+        
+        try {
+            const response = await fetch(`${scriptURL}?action=check&query=${encodeURIComponent(searchVal)}`);
+            const result = await response.json();
+            
+            display.classList.remove('hidden');
+            
+            if(result.status === 'found') {
+                containerCari.classList.add('hidden');
+                btnReset.classList.remove('hidden');
+                
+                display.innerHTML = `
+                    <div class="result-card p-6 rounded-[2rem] space-y-4 animate-fade-in">
+                        <div class="flex justify-between items-start text-left">
+                            <div>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Calon Santri</p>
+                                <h4 class="text-white font-black text-lg uppercase tracking-tight">${result.nama}</h4>
+                            </div>
+                            <span class="status-badge bg-green-500/20 text-green-400 border border-green-500/30">Terdaftar</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/5 text-left">
+                            <div>
+                                <p class="text-[9px] text-slate-500 font-bold uppercase">Status</p>
+                                <p class="text-white text-[11px] font-bold uppercase tracking-wide">Diverifikasi</p>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-slate-500 font-bold uppercase">ID Pendaftaran</p>
+                                <p class="text-[#FFD700] text-[11px] font-bold">${result.nis}</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-500/10 p-4 rounded-2xl flex items-center gap-4 mt-2">
+                            <i class="fas fa-info-circle text-blue-400"></i>
+                            <p class="text-[9px] text-slate-300 leading-relaxed font-medium text-left">
+                                Data valid. Silakan simpan ID di atas untuk tahap verifikasi berkas di kantor pusat.
+                            </p>
+                        </div>
+                    </div>`;
+            } else {
+                display.innerHTML = `
+                    <div class="text-center p-6 bg-red-500/5 rounded-3xl border border-red-500/10">
+                        <i class="fas fa-user-slash text-red-500 text-3xl mb-3 opacity-50"></i>
+                        <p class="text-red-400 text-[10px] font-black uppercase tracking-widest">Data Tidak Ditemukan</p>
+                        <p class="text-slate-500 text-[9px] mt-2">Pastikan nama sesuai dengan saat mendaftar atau hubungi admin.</p>
+                    </div>`;
+            }
+        } catch (e) {
+            alert('Gangguan koneksi, silakan coba lagi nanti.');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<span>Periksa Status</span> <i class="fas fa-arrow-right text-[10px] ml-2"></i>';
+        }
+    }
+
+    function resetPencarian() {
+        document.getElementById('pencarian_container').classList.remove('hidden');
+        document.getElementById('hasil_cek').classList.add('hidden');
+        document.getElementById('btn_reset_cari').classList.add('hidden');
+        document.getElementById('cek_nik').value = '';
+        document.getElementById('cek_nik').focus();
+    }
+
+    // Listener Enter Key untuk Input Cek Status
+    document.getElementById('cek_nik').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') cariDataSantri();
+    });
+
+    /**
+     * 5. FORM REGISTRATION LOGIC
+     */
+    const form = document.getElementById('regForm');
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        if(!file) return resolve("");
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        
+        const loader = document.getElementById('loader');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const loaderSign = document.getElementById('loaderSign');
+
+        // UI State: Sending
+        loader.classList.remove('hidden');
+        submitBtn.disabled = true;
+        btnText.innerText = "Sedang Mengirim...";
+        loaderSign.classList.remove('hidden');
+        
+        try {
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Map files to Base64
+            const fileInputs = {
+                file_kk: 'f_kk',
+                file_akte: 'f_akte',
+                file_ktp_ayah: 'f_ktp_ayah',
+                file_ktp_ibu: 'f_ktp_ibu',
+                file_santri: 'f_santri',
+                file_ijazah: 'f_ijazah',
+                file_bukti: 'f_bukti'
+            };
+
+            for (const [key, id] of Object.entries(fileInputs)) {
+                const file = document.getElementById(id).files[0];
+                if(file) data[key] = await toBase64(file);
+            }
+
+            const response = await fetch(scriptURL, { 
+                method: 'POST', 
+                body: JSON.stringify(data) 
+            });
+            const result = await response.json();
+
+            if(result.status === 'success') {
+                alert('Alhamdulillah! Pendaftaran Berhasil.\n\nSIMPAN NOMOR NIS ANDA:\n' + result.nis);
+                form.reset();
+                closeModal('modalDaftar'); // Menutup modal pendaftaran jika sukses
+            } else { 
+                throw new Error(result.message); 
+            }
+        } catch (error) {
+            alert('Mohon maaf, terjadi kesalahan: ' + error.message);
+        } finally {
+            loader.classList.add('hidden');
+            submitBtn.disabled = false;
+            btnText.innerText = "Kirim Formulir Sekarang";
+            loaderSign.classList.add('hidden');
+        }
+    });
+</script>
+</body>
+</html>
